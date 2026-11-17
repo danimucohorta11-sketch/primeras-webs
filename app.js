@@ -7,7 +7,7 @@
   'use strict';
 
   // ---- Configuración editable (confirmar horario real con el cliente) ----
-  // 0 = domingo ... 6 = sábado. null = cerrado. Formato [apertura, cierre] en horas decimales.
+  // 0 = domingo ... 6 = sábado. null = cerrado. [apertura, cierre] en horas decimales.
   var HOURS = { 0: null, 1: [8.5, 18], 2: [8.5, 18], 3: [8.5, 18], 4: [8.5, 18], 5: [8.5, 18], 6: null };
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -17,6 +17,7 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   initOpenStatus();
+  initSpotlight();
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -25,7 +26,6 @@
     document.documentElement.classList.add('no-gsap');
     document.body.classList.remove('is-loading');
     $$('.pcard').forEach(function (c) { c.classList.add('is-active'); });
-    initSpotlight();
     return;
   }
 
@@ -45,14 +45,14 @@
   }
 
   // Anclas suaves
-  $$('[data-scroll], a[href^="#"]').forEach(function (a) {
+  $$('a[href^="#"]').forEach(function (a) {
     var href = a.getAttribute('href');
-    if (!href || href.length < 2 || href.charAt(0) !== '#') return;
+    if (!href || href.length < 2) return;
     a.addEventListener('click', function (e) {
       var target = $(href);
       if (!target) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: -20, duration: 1.4, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+      if (lenis) lenis.scrollTo(target, { offset: -10, duration: 1.4, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
       else target.scrollIntoView({ behavior: 'smooth' });
     });
   });
@@ -85,8 +85,7 @@
 
   var heroInners = [];
   $$('[data-reveal]').forEach(function (el) {
-    var label = el.textContent.replace(/\s+/g, ' ').trim();
-    el.setAttribute('aria-label', label);
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
     var inners = splitWords(el);
     inners.forEach(function (n) { n.setAttribute('aria-hidden', 'true'); });
     gsap.set(inners, { yPercent: 110 });
@@ -96,35 +95,54 @@
     ScrollTrigger.create({
       trigger: el, start: 'top 88%', once: true,
       onEnter: function () {
-        gsap.to(inners, { yPercent: 0, duration: 1.2, ease: 'power4.out', stagger: 0.045 });
+        gsap.to(inners, { yPercent: 0, duration: 1.2, ease: 'power4.out', stagger: 0.05 });
       }
     });
   });
 
   // Fade-up genérico
   $$('[data-fade]').forEach(function (el) {
-    if (el.hasAttribute('data-hero-fade')) return;
-    gsap.set(el, { opacity: 0, y: 32 });
+    gsap.set(el, { opacity: 0, y: 28 });
     ScrollTrigger.create({
-      trigger: el, start: 'top 90%', once: true,
+      trigger: el, start: 'top 92%', once: true,
       onEnter: function () { gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }); }
     });
   });
 
-  // Hero fades (esperan al preloader)
+  // Hero: elementos que entran tras el preloader
   var heroFades = $$('[data-hero-fade]');
-  gsap.set(heroFades, { opacity: 0, y: 24 });
+  gsap.set(heroFades, { opacity: 0, y: 22 });
   gsap.set('.nav', { yPercent: -160, opacity: 0 });
 
   // ---------------------------------------------------------
-  // PRELOADER
+  // FOTOS · revelado suave (zoom-out 1.08 → 1)
+  // ---------------------------------------------------------
+  var heroFig = $('[data-photo="hero"]');
+  $$('[data-photo]').forEach(function (fig) {
+    var img = $('img', fig);
+    if (!img) return;
+    gsap.set(img, { scale: 1.08 });
+    gsap.set(fig, { opacity: 0 });
+    if (fig === heroFig) return; // lo dirige el preloader
+    ScrollTrigger.create({
+      trigger: fig, start: 'top 90%', once: true,
+      onEnter: function () {
+        gsap.to(fig, { opacity: 1, duration: 0.9, ease: 'power2.out' });
+        gsap.to(img, { scale: 1, duration: 1.8, ease: 'power3.out' });
+      }
+    });
+  });
+
+  // ---------------------------------------------------------
+  // PRELOADER (cálido y breve)
   // ---------------------------------------------------------
   var pre = $('#preloader');
-  var counter = { v: 0 };
-  var preCount = $('#preCount'), preBar = $('#preBar');
+  var markInners = splitWords($('#preMark'));
+  gsap.set(markInners, { yPercent: 110 });
+  gsap.set('#preSub', { opacity: 0, y: 10 });
 
   var tl = gsap.timeline({
-    defaults: { ease: 'power2.inOut' },
+    defaults: { ease: 'power3.out' },
     onComplete: function () {
       document.body.classList.remove('is-loading');
       if (lenis) lenis.start();
@@ -133,22 +151,18 @@
     }
   });
 
-  tl.to(counter, {
-    v: 100, duration: reduce ? 0.2 : 1.1, ease: 'power1.inOut',
-    onUpdate: function () {
-      var n = Math.round(counter.v);
-      preCount.textContent = String(n).padStart(3, '0');
-      preBar.style.transform = 'scaleX(' + (counter.v / 100) + ')';
-    }
-  })
-  .to('.preloader__center, .preloader__top, .preloader__bottom', { opacity: 0, duration: 0.25, ease: 'power1.out' }, '+=0.05')
-  .to(pre, { clipPath: 'inset(0 0 100% 0)', duration: 0.9, ease: 'power4.inOut' }, '-=0.05')
-  .fromTo('[data-hero-media]', { scale: 1.25 }, { scale: 1, duration: 1.8, ease: 'power3.out' }, '-=0.7')
-  .to(heroInners, { yPercent: 0, duration: 1.3, ease: 'power4.out', stagger: 0.08 }, '-=1.4')
-  .to(heroFades, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.1 }, '-=1.0')
-  .to('.nav', { yPercent: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=1.2');
+  tl.to(markInners, { yPercent: 0, duration: 0.8, stagger: 0.1 })
+    .to('#preSub', { opacity: 1, y: 0, duration: 0.5 }, '-=0.5')
+    .to('#preBar', { scaleX: 1, duration: reduce ? 0.1 : 0.8, ease: 'power1.inOut' }, '-=0.6')
+    .to('.preloader__inner', { opacity: 0, y: -20, duration: 0.35, ease: 'power2.in' }, '+=0.05')
+    .to(pre, { clipPath: 'inset(0 0 100% 0)', duration: 0.9, ease: 'power4.inOut' }, '-=0.1')
+    .to(heroInners, { yPercent: 0, duration: 1.2, stagger: 0.06, ease: 'power4.out' }, '-=0.5')
+    .to(heroFig, { opacity: 1, duration: 1, ease: 'power2.out' }, '-=1.1')
+    .to($('img', heroFig), { scale: 1, duration: 1.8, ease: 'power3.out' }, '-=1.1')
+    .to(heroFades, { opacity: 1, y: 0, duration: 0.9, stagger: 0.09, ease: 'power3.out' }, '-=1.0')
+    .to('.nav', { yPercent: 0, opacity: 1, duration: 0.9 }, '-=1.1');
 
-  // Salvavidas: si algo falla, nunca dejar al usuario atrapado en el preloader
+  // Salvavidas: nunca dejar al usuario atrapado en el preloader
   setTimeout(function () {
     if (document.body.classList.contains('is-loading')) tl.progress(1);
   }, 6000);
@@ -162,69 +176,53 @@
   });
 
   // ---------------------------------------------------------
-  // PARALLAX
+  // PARALLAX suave en el collage del taller
   // ---------------------------------------------------------
-  gsap.to('[data-hero-media] img', {
-    yPercent: 12, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-  gsap.to('.hero__inner', {
-    yPercent: -8, opacity: 0.2, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-  $$('[data-parallax]').forEach(function (img) {
-    gsap.fromTo(img, { yPercent: -8 }, {
-      yPercent: 8, ease: 'none',
-      scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+  if (!reduce) {
+    $$('[data-speed]').forEach(function (el) {
+      var v = parseFloat(el.getAttribute('data-speed')) || 20;
+      gsap.fromTo(el, { y: -v }, {
+        y: v, ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
     });
-  });
+  }
 
   // ---------------------------------------------------------
-  // TICKER (acelera con la velocidad de scroll)
+  // TICKER (acelera ligeramente con el scroll)
   // ---------------------------------------------------------
   var track = $('#tickerTrack');
   if (track && !reduce) {
-    var loop = gsap.to(track, { xPercent: -50, ease: 'none', duration: 32, repeat: -1 });
+    var loop = gsap.to(track, { xPercent: -50, ease: 'none', duration: 38, repeat: -1 });
     var boost = 0;
     if (lenis) lenis.on('scroll', function (e) { boost = Math.min(Math.abs(e.velocity), 30); });
     gsap.ticker.add(function () {
       boost *= 0.92;
-      loop.timeScale(1 + boost * 0.35);
+      loop.timeScale(1 + boost * 0.3);
     });
   } else if (track) {
     document.documentElement.classList.add('no-gsap');
   }
 
   // ---------------------------------------------------------
-  // PROTOCOLO · sticky scroll con ficha técnica
+  // COMPROMISO · sticky scroll
   // ---------------------------------------------------------
   var pcards = $$('.pcard');
-  var sheetNo = $('#sheetNo'), sheetTitle = $('#sheetTitle'), sheetStep = $('#sheetStep'), sheetBar = $('#sheetBar');
-  var sheetItems = $$('[data-sheet]');
-  var currentStep = -1;
+  var dots = $$('[data-dot]');
+  var stepNow = $('#stepNow');
 
   function setStep(i) {
-    if (i === currentStep) return;
-    var first = currentStep === -1;
-    currentStep = i;
     pcards.forEach(function (c, k) { c.classList.toggle('is-active', k === i); });
-    sheetItems.forEach(function (li, k) {
-      li.classList.toggle('is-active', k === i);
-      li.classList.toggle('is-done', k < i);
+    dots.forEach(function (d, k) {
+      d.classList.toggle('is-active', k === i);
+      d.classList.toggle('is-done', k < i);
     });
-    sheetStep.textContent = '0' + (i + 1) + ' / 04';
-    sheetBar.style.transform = 'scaleX(' + ((i + 1) / pcards.length) + ')';
-    var title = pcards[i].getAttribute('data-title');
-    if (first) { sheetNo.textContent = '0' + (i + 1); sheetTitle.textContent = title; return; }
-    gsap.timeline()
-      .to([sheetNo, sheetTitle], { yPercent: -30, opacity: 0, duration: 0.18, ease: 'power2.in' })
-      .add(function () { sheetNo.textContent = '0' + (i + 1); sheetTitle.textContent = title; })
-      .fromTo([sheetNo, sheetTitle], { yPercent: 30, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' });
+    if (stepNow) stepNow.textContent = String(i + 1);
   }
 
   pcards.forEach(function (card, i) {
     ScrollTrigger.create({
-      trigger: card, start: 'top 60%', end: 'bottom 60%',
+      trigger: card, start: 'top 62%', end: 'bottom 62%',
       onEnter: function () { setStep(i); },
       onEnterBack: function () { setStep(i); }
     });
@@ -232,17 +230,12 @@
   setStep(0);
 
   // ---------------------------------------------------------
-  // BENTO · spotlight dinámico (brillo + borde)
-  // ---------------------------------------------------------
-  initSpotlight();
-
-  // ---------------------------------------------------------
   // BOTONES MAGNÉTICOS
   // ---------------------------------------------------------
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (fine && !reduce) {
     $$('[data-magnetic]').forEach(function (el) {
-      var strength = 0.35, pad = 60;
+      var strength = 0.3, pad = 50;
       var qx = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3.out' });
       var qy = gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power3.out' });
       var inside = false;
@@ -265,8 +258,8 @@
   // FOOTER gigante
   // ---------------------------------------------------------
   gsap.from('#giant', {
-    yPercent: 35, opacity: 0, ease: 'power3.out',
-    scrollTrigger: { trigger: '.footer__giant', start: 'top 105%', end: 'top 60%', scrub: 0.6 }
+    yPercent: 25, opacity: 0, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer__giant', start: 'top 105%', end: 'top 65%', scrub: 0.6 }
   });
 
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
@@ -298,11 +291,9 @@
     var h = HOURS[day];
     var open = !!h && now >= h[0] && now < h[1];
     wrap.classList.toggle('is-open', open);
-    text.textContent = open ? 'ABIERTO AHORA' : 'CERRADO AHORA';
+    text.textContent = open ? 'Abierto ahora' : 'Cerrado ahora';
     var rows = $$('.hours dl > div');
-    var order = [1, 2, 3, 4, 5, 6, 0];
     var idx = day >= 1 && day <= 5 ? 0 : (day === 6 ? 1 : 2);
     if (rows[idx]) rows[idx].classList.add('is-today');
-    void order;
   }
 })();

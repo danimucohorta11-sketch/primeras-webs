@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Talleres Chicote — Taller mecánico en Sant Andreu, Barcelona</title>
-  <meta name="description" content="Taller mecánico en Sant Andreu (Barcelona). Presupuesto cerrado por escrito, piezas sustituidas entregadas, factura detallada y garantía legal total. Llama al 933 52 70 28.">
-  <meta name="theme-color" content="#0A0A0B">
+  <meta name="description" content="Taller mecánico de barrio en Sant Andreu (Barcelona). Presupuesto por escrito, te devolvemos las piezas cambiadas, factura clara y garantía en todo. Llámanos al 933 52 70 28.">
+  <meta name="theme-color" content="#181817">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
   <script type="application/ld+json">
@@ -33,33 +33,27 @@
 
   <!-- ============ PRELOADER ============ -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__top mono">
-      <span>CHICOTE / SYS.INIT</span>
-      <span>41.4331° N, 2.1897° E</span>
-    </div>
-    <div class="preloader__center">
-      <div class="preloader__count display"><span id="preCount">000</span><i>%</i></div>
-      <div class="preloader__bar"><span id="preBar"></span></div>
-    </div>
-    <div class="preloader__bottom mono">
-      <span>CALIBRANDO DIAGNÓSTICO</span>
-      <span>SANT ANDREU · BCN</span>
+    <div class="preloader__inner">
+      <p class="preloader__mark display" id="preMark">Talleres Chicote</p>
+      <p class="preloader__sub" id="preSub">Taller mecánico en Sant Andreu</p>
+      <div class="preloader__line"><span id="preBar"></span></div>
     </div>
   </div>
 
   <!-- ============ NAVBAR ============ -->
   <header class="nav" id="nav">
     <a href="#top" class="nav__logo display" data-scroll>
-      <span class="nav__dot"></span>TALLERES CHICOTE
+      <span class="nav__dot"></span>Talleres Chicote
     </a>
     <nav class="nav__links" aria-label="Principal">
       <a href="#servicios" data-scroll>Servicios</a>
       <a href="#compromiso" data-scroll>Compromiso</a>
-      <a href="#ubicacion" data-scroll>Ubicación</a>
+      <a href="#taller" data-scroll>El taller</a>
+      <a href="#ubicacion" data-scroll>Dónde estamos</a>
     </nav>
     <a href="tel:+34933527028" class="btn btn--accent btn--sm" data-magnetic>
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-      <span class="btn__label"><span class="nav__callword">Llamar: </span><span class="mono">933 52 70 28</span></span>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span class="btn__label"><span class="nav__callword">Llámanos: </span>933 52 70 28</span>
     </a>
   </header>
 
@@ -67,222 +61,250 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <div class="hero__media" data-hero-media>
-        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=2200&q=70" alt="" fetchpriority="high" onerror="this.remove()">
-      </div>
-      <div class="hero__shade"></div>
-      <div class="hero__grid"></div>
+      <div class="hero__inner wrap">
+        <div class="hero__copy">
+          <p class="hero__eyebrow" data-hero-fade><i></i>Taller mecánico · Sant Andreu, Barcelona</p>
 
-      <div class="hero__inner">
-        <div class="hero__meta mono" data-hero-fade>
-          <span class="tag"><i class="pulse"></i> TALLER MECÁNICO · SANT ANDREU</span>
-          <span class="hero__coords">41.4331° N, 2.1897° E — BARCELONA</span>
-        </div>
+          <h1 class="hero__title display" data-reveal="hero">
+            Tu coche, en buenas manos. <em>Y con las cuentas claras.</em>
+          </h1>
 
-        <h1 class="hero__title display" data-reveal="hero">
-          Precisión mecánica. <em>Cero</em> letra pequeña.
-        </h1>
-
-        <div class="hero__bottom">
           <p class="hero__sub" data-hero-fade>
-            Reparamos tu coche como si fuera el nuestro y te lo demostramos por escrito:
-            presupuesto cerrado, piezas a la vista y factura que coincide al céntimo.
-            Sin sorpresas. Sin letra pequeña.
+            Somos el taller de Carrer d'Alexandre Galí. Te explicamos qué le pasa a tu coche,
+            cuánto cuesta arreglarlo y qué vamos a hacer, por escrito y antes de empezar.
+            Sin sorpresas en la factura.
           </p>
+
           <div class="hero__cta" data-hero-fade>
             <a href="tel:+34933527028" class="btn btn--accent btn--lg" data-magnetic>
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-              <span class="btn__label">Llamar ahora <span class="mono">933 52 70 28</span></span>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+              <span class="btn__label">Llamar al 933 52 70 28</span>
             </a>
-            <a href="#servicios" class="btn btn--ghost btn--lg" data-magnetic data-scroll>
-              <span class="btn__label">Ver servicios</span>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            <a href="#compromiso" class="btn btn--ghost btn--lg" data-magnetic data-scroll>
+              <span class="btn__label">Cómo trabajamos</span>
             </a>
+          </div>
+
+          <a class="hero__addr" href="https://www.google.com/maps/search/?api=1&query=Carrer+d'Alexandre+Gal%C3%AD+41+08027+Barcelona" target="_blank" rel="noopener" data-hero-fade>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            Carrer d'Alexandre Galí, 41 · 08027 Barcelona
+          </a>
+        </div>
+
+        <div class="hero__visual">
+          <figure class="photo hero__photo" data-photo="hero">
+            <img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=1400&q=78" alt="Mecánico sonriendo junto a un coche con el capó abierto" fetchpriority="high" onerror="this.remove()">
+          </figure>
+          <div class="hero__sticker" data-hero-fade>
+            <span class="hero__sticker-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+            <span><strong>Presupuesto por escrito</strong><br>antes de tocar nada</span>
           </div>
         </div>
       </div>
-
-      <div class="hero__scroll mono" data-hero-fade><span></span>SCROLL</div>
     </section>
 
     <!-- ============ TICKER ============ -->
-    <section class="ticker" aria-label="Valores del taller">
+    <section class="ticker" aria-label="Lo que nos define">
       <div class="ticker__track" id="tickerTrack">
         <div class="ticker__group">
-          <span>DIAGNOSIS AVANZADA</span><i></i><span>PRESUPUESTO CERRADO</span><i></i><span>SANT ANDREU BCN</span><i></i><span>GARANTÍA TOTAL</span><i></i><span>PIEZAS ORIGINALES</span><i></i>
+          <span>Presupuesto cerrado</span><i></i><span>Te enseñamos las piezas</span><i></i><span>Factura clara</span><i></i><span>Garantía total</span><i></i><span>Taller de barrio en Sant Andreu</span><i></i>
         </div>
         <div class="ticker__group" aria-hidden="true">
-          <span>DIAGNOSIS AVANZADA</span><i></i><span>PRESUPUESTO CERRADO</span><i></i><span>SANT ANDREU BCN</span><i></i><span>GARANTÍA TOTAL</span><i></i><span>PIEZAS ORIGINALES</span><i></i>
+          <span>Presupuesto cerrado</span><i></i><span>Te enseñamos las piezas</span><i></i><span>Factura clara</span><i></i><span>Garantía total</span><i></i><span>Taller de barrio en Sant Andreu</span><i></i>
         </div>
       </div>
     </section>
 
-    <!-- ============ SERVICIOS · BENTO ============ -->
-    <section class="section" id="servicios">
+    <!-- ============ SERVICIOS ============ -->
+    <section class="section section--cream" id="servicios">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow mono" data-fade>/ 01 — SERVICIOS</p>
-          <h2 class="h2 display" data-reveal>Todo lo que tu coche necesita. <span class="muted">Nada que no necesite.</span></h2>
+          <p class="eyebrow" data-fade>Servicios</p>
+          <h2 class="h2 display" data-reveal>Lo que hacemos en el taller, <em>contado en cristiano.</em></h2>
         </div>
 
         <div class="bento">
           <article class="card card--a" data-spot>
-            <div class="card__media"><img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1400&q=70" alt="" loading="lazy" data-parallax onerror="this.remove()"></div>
+            <figure class="photo card__photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1200&q=75" alt="Mecánico revisando el motor de un coche" loading="lazy" onerror="this.remove()">
+            </figure>
             <div class="card__body">
-              <span class="card__idx mono">01</span>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div>
               <h3 class="display">Mecánica general</h3>
-              <p>Motor, distribución, embrague, suspensión, escape y todo lo que mueve tu coche. Trabajo limpio, documentado y con presupuesto cerrado antes de empezar.</p>
-              <span class="card__link mono">REPARACIÓN INTEGRAL →</span>
+              <p>Motor, embrague, distribución, suspensión, escape… Si tu coche se mueve, nos encargamos. Te explicamos la avería con calma y te enseñamos lo que hay que cambiar.</p>
             </div>
           </article>
 
           <article class="card card--b" data-spot>
             <div class="card__body">
-              <span class="card__idx mono">02</span>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><path d="M9.5 12h1.5l1-2 1.5 4 1-2h1"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
               <h3 class="display">Diagnosis electrónica</h3>
-              <p>Lectura de centralitas y localización exacta de la avería: pagas por reparar el fallo real, no por probar piezas a ver si acertamos.</p>
-              <div class="trace" aria-hidden="true"><svg viewBox="0 0 400 60" preserveAspectRatio="none"><path d="M0 30 H90 L105 8 L125 52 L140 30 H230 L245 14 L262 46 L275 30 H400" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div>
+              <p>¿Se te ha encendido un testigo? Lo leemos con el equipo y buscamos la causa de verdad. Así arreglas lo que falla, no lo que "podría" fallar.</p>
             </div>
+            <figure class="photo card__side" data-photo>
+              <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=700&q=75" alt="Manos trabajando con una placa electrónica" loading="lazy" onerror="this.remove()">
+            </figure>
           </article>
 
           <article class="card card--c" data-spot>
             <div class="card__body">
-              <span class="card__idx mono">03</span>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2V4a1 1 0 0 1 1-1z"/><path d="m9 14 2 2 4-4"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2V4a1 1 0 0 1 1-1z"/><path d="m9 14 2 2 4-4"/></svg></div>
               <h3 class="display">Revisiones pre-ITV</h3>
-              <p>Revisamos todos los puntos de inspección antes de pasar la ITV para que llegues tranquilo.</p>
+              <p>Antes de ir a la ITV, lo repasamos todo para que no te lleves un susto (ni una vuelta de más).</p>
             </div>
           </article>
 
           <article class="card card--d" data-spot>
             <div class="card__body">
-              <span class="card__idx mono">04</span>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
               <h3 class="display">Frenos y neumáticos</h3>
-              <p>Pastillas, discos, líquido, montaje, equilibrado y alineación. Lo que más importa en carretera, hecho con la máxima exigencia y te enseñamos el desgaste real.</p>
-              <span class="card__link mono">SEGURIDAD ACTIVA →</span>
+              <p>Pastillas, discos, líquido, ruedas… Lo que más importa cuando te llevas a la familia. Te enseñamos el desgaste para que lo veas tú mismo.</p>
             </div>
           </article>
 
           <article class="card card--e" data-spot>
             <div class="card__body">
-              <span class="card__idx mono">05</span>
-              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
               <h3 class="display">Mantenimiento preventivo</h3>
-              <p>Aceite, filtros y niveles según fabricante. Un coche cuidado cuesta menos.</p>
+              <p>Aceite, filtros y revisiones según el fabricante. Un coche cuidado te da menos disgustos y menos gasto a la larga.</p>
             </div>
+            <figure class="photo card__side" data-photo>
+              <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=75" alt="Cambio de aceite en el motor de un coche" loading="lazy" onerror="this.remove()">
+            </figure>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ PROTOCOLO DE TRANSPARENCIA ============ -->
-    <section class="section section--protocol" id="compromiso">
+    <!-- ============ COMPROMISO ============ -->
+    <section class="section section--dark" id="compromiso">
       <div class="wrap protocol">
         <aside class="protocol__side">
           <div class="protocol__sticky">
-            <p class="eyebrow mono" data-fade>/ 02 — GARANTÍA CHICOTE</p>
-            <h2 class="h2 display" data-reveal>Protocolo de <em>transparencia.</em></h2>
-            <p class="protocol__lead" data-fade>Cuatro compromisos que se cumplen en cada reparación. Por escrito, sin excepciones.</p>
+            <p class="eyebrow" data-fade>Nuestro compromiso contigo</p>
+            <h2 class="h2 display" data-reveal>Aquí las cosas <em>claras.</em></h2>
+            <p class="protocol__lead" data-fade>Lo que más miedo da de ir al mecánico es la factura. Por eso esto es lo que te prometemos, y lo hacemos por escrito.</p>
 
-            <div class="sheet" data-fade>
-              <div class="sheet__row mono"><span>FICHA TÉCNICA</span><span id="sheetStep">01 / 04</span></div>
-              <div class="sheet__bigno display" id="sheetNo">01</div>
-              <div class="sheet__title" id="sheetTitle">Presupuesto cerrado por escrito</div>
-              <div class="sheet__bar"><span id="sheetBar"></span></div>
-              <ul class="sheet__list mono">
-                <li data-sheet="0"><i></i>PRESUPUESTO</li>
-                <li data-sheet="1"><i></i>TRAZABILIDAD</li>
-                <li data-sheet="2"><i></i>FACTURA</li>
-                <li data-sheet="3"><i></i>GARANTÍA</li>
-              </ul>
+            <figure class="photo protocol__photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=1000&q=75" alt="Mecánico trabajando con atención en un motor" loading="lazy" onerror="this.remove()">
+            </figure>
+
+            <div class="steps" data-fade>
+              <span class="steps__label"><b id="stepNow">1</b> de 4</span>
+              <div class="steps__dots"><i data-dot></i><i data-dot></i><i data-dot></i><i data-dot></i></div>
             </div>
           </div>
         </aside>
 
         <div class="protocol__list">
-          <article class="pcard" data-step="0" data-title="Presupuesto cerrado por escrito">
-            <div class="pcard__top mono"><span>COMPROMISO 01</span><span class="pcard__state">VERIFICADO</span></div>
-            <div class="pcard__no display">01</div>
-            <h3 class="display">Presupuesto cerrado por escrito</h3>
-            <p>Antes de tocar un solo tornillo recibes el desglose exacto de piezas y mano de obra. Si lo aceptas, ese es el precio. Si hay que ampliar algo, te llamamos primero y tú decides.</p>
-            <ul class="pcard__facts mono"><li>PIEZAS DESGLOSADAS</li><li>MANO DE OBRA EXACTA</li><li>SIN AMPLIACIONES SORPRESA</li></ul>
+          <article class="pcard" data-step="0">
+            <span class="pcard__no display">1</span>
+            <div class="pcard__check"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <h3 class="display">Te damos el precio por escrito antes de empezar</h3>
+            <p>Antes de tocar nada, te pasamos un presupuesto con las piezas y la mano de obra, una por una. Si lo aceptas, ese es el precio. Y si por el camino aparece algo más, te llamamos primero y decides tú.</p>
           </article>
 
-          <article class="pcard" data-step="1" data-title="Trazabilidad y piezas sustituidas">
-            <div class="pcard__top mono"><span>COMPROMISO 02</span><span class="pcard__state">VERIFICADO</span></div>
-            <div class="pcard__no display">02</div>
-            <h3 class="display">Trazabilidad y piezas sustituidas</h3>
-            <p>Te entregamos físicamente las piezas que hemos cambiado, para que veas con tus propios ojos qué estaba mal. Salvo las que debamos conservar por garantía del fabricante.</p>
-            <ul class="pcard__facts mono"><li>ENTREGA EN MANO</li><li>PRUEBA VISUAL</li><li>EXCEPTO GARANTÍA DE FABRICANTE</li></ul>
+          <article class="pcard" data-step="1">
+            <span class="pcard__no display">2</span>
+            <div class="pcard__check"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <h3 class="display">Te devolvemos las piezas que cambiamos</h3>
+            <p>Llévate lo viejo y míralo con tus propios ojos: es la mejor forma de comprobar que se ha cambiado de verdad. Las únicas excepciones son las piezas que el fabricante nos pide conservar por su garantía.</p>
           </article>
 
-          <article class="pcard" data-step="2" data-title="Factura detallada y transparente">
-            <div class="pcard__top mono"><span>COMPROMISO 03</span><span class="pcard__state">VERIFICADO</span></div>
-            <div class="pcard__no display">03</div>
-            <h3 class="display">Factura detallada y transparente</h3>
-            <p>Desglose limpio con IVA incluido, línea por línea. El importe final coincide al céntimo con el presupuesto que aceptaste. Lo que firmas es lo que pagas.</p>
-            <ul class="pcard__facts mono"><li>IVA DESGLOSADO</li><li>COINCIDE AL CÉNTIMO</li><li>SIN CONCEPTOS OCULTOS</li></ul>
+          <article class="pcard" data-step="2">
+            <span class="pcard__no display">3</span>
+            <div class="pcard__check"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <h3 class="display">Una factura que coincide con el presupuesto</h3>
+            <p>Detallada, con el IVA desglosado y al céntimo igual que lo que aceptaste. Sin extras raros ni conceptos que no entiendas. Lo que firmas es lo que pagas.</p>
           </article>
 
-          <article class="pcard" data-step="3" data-title="Garantía legal total">
-            <div class="pcard__top mono"><span>COMPROMISO 04</span><span class="pcard__state">VERIFICADO</span></div>
-            <div class="pcard__no display">04</div>
-            <h3 class="display">Garantía legal total</h3>
-            <p>Cobertura completa en todas nuestras reparaciones, tal y como marca la ley. Y por supuesto, hojas de reclamaciones oficiales a tu disposición en el taller.</p>
-            <ul class="pcard__facts mono"><li>TODAS LAS REPARACIONES</li><li>HOJAS DE RECLAMACIONES</li><li>TRATO DE TÚ A TÚ</li></ul>
+          <article class="pcard" data-step="3">
+            <span class="pcard__no display">4</span>
+            <div class="pcard__check"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <h3 class="display">Garantía en todo lo que hacemos</h3>
+            <p>Todas nuestras reparaciones tienen su garantía legal. Y tenemos hojas de reclamaciones a tu disposición, aunque preferimos que nos lo digas a la cara y lo arreglemos juntos.</p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- ============ EL TALLER ============ -->
+    <section class="section section--sand" id="taller">
+      <div class="wrap about">
+        <div class="about__copy">
+          <p class="eyebrow" data-fade>El taller</p>
+          <h2 class="h2 display" data-reveal>Un taller de barrio, <em>con la puerta abierta.</em></h2>
+          <p class="about__text" data-fade>Estamos en Sant Andreu, en Carrer d'Alexandre Galí. Aquí no hay mostradores fríos ni palabras raras: te atendemos de tú a tú, miramos tu coche contigo y te decimos las cosas como son. Si algo no hace falta cambiarlo, te lo decimos.</p>
+          <ul class="about__points" data-fade>
+            <li><strong>Te lo explicamos todo.</strong> Qué le pasa, por qué y qué opciones tienes.</li>
+            <li><strong>Sin prisas ni presiones.</strong> Decides tú, con toda la información delante.</li>
+            <li><strong>Trabajo ordenado y limpio.</strong> Tu coche se trata como si fuera nuestro.</li>
+          </ul>
+        </div>
+
+        <div class="about__collage">
+          <div class="collage__a" data-speed="26">
+            <figure class="photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&w=1200&q=75" alt="Taller mecánico amplio y luminoso con coches en reparación" loading="lazy" onerror="this.remove()">
+            </figure>
+          </div>
+          <div class="collage__b" data-speed="-22">
+            <figure class="photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1599256872237-5dcc0fbe9668?auto=format&fit=crop&w=800&q=75" alt="Manos de mecánico con una llave sobre un motor" loading="lazy" onerror="this.remove()">
+            </figure>
+          </div>
+          <div class="collage__c" data-speed="18">
+            <figure class="photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=800&q=75" alt="Pared de herramientas ordenadas en el taller" loading="lazy" onerror="this.remove()">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ UBICACIÓN Y CONTACTO ============ -->
-    <section class="section" id="ubicacion">
+    <section class="section section--cream" id="ubicacion">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow mono" data-fade>/ 03 — UBICACIÓN</p>
-          <h2 class="h2 display" data-reveal>En el corazón de <em>Sant Andreu.</em></h2>
+          <p class="eyebrow" data-fade>Dónde estamos</p>
+          <h2 class="h2 display" data-reveal>Pásate por el taller, <em>o llámanos.</em></h2>
         </div>
 
         <div class="loc" data-fade>
           <div class="loc__left">
-            <div class="loc__map" aria-hidden="true">
-              <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1400&q=70" alt="" loading="lazy" data-parallax onerror="this.remove()">
-              <div class="loc__pin"><span></span><i></i></div>
-              <div class="loc__coords mono">41.4331° N<br>2.1897° E</div>
-            </div>
+            <figure class="photo loc__photo" data-photo>
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=75" alt="Mecánico trabajando en el taller" loading="lazy" onerror="this.remove()">
+            </figure>
             <div class="loc__addr">
-              <p class="mono loc__label">DIRECCIÓN</p>
-              <address class="display">Carrer d'Alexandre Galí, 41<br>08027 Barcelona</address>
-              <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=Carrer+d'Alexandre+Gal%C3%AD+41+08027+Barcelona" target="_blank" rel="noopener" data-magnetic>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-                <span class="btn__label">Abrir en Google Maps</span>
+              <p class="loc__label">Dirección</p>
+              <address class="display">Carrer d'Alexandre Galí, 41<br>08027 Barcelona · Sant Andreu</address>
+              <a class="btn btn--ghost btn--onlight" href="https://www.google.com/maps/search/?api=1&query=Carrer+d'Alexandre+Gal%C3%AD+41+08027+Barcelona" target="_blank" rel="noopener" data-magnetic>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <span class="btn__label">Cómo llegar (Google Maps)</span>
               </a>
             </div>
           </div>
 
           <div class="loc__right">
-            <p class="mono loc__label">LLÁMANOS</p>
-            <a href="tel:+34933527028" class="bigphone mono" data-magnetic><span>933 52 70 28</span><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <p class="loc__label">Llámanos</p>
+            <a href="tel:+34933527028" class="bigphone display" data-magnetic><span>933 52 70 28</span>
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
 
-            <div class="hours mono">
-              <div class="hours__head"><span>HORARIO</span><span class="status" id="status"><i></i><b id="statusText">—</b></span></div>
+            <div class="hours">
+              <div class="hours__head"><span>Horario</span><span class="status" id="status"><i></i><b id="statusText">—</b></span></div>
               <!-- TODO Norbentis: confirmar horario real con el cliente antes de publicar (editar también HOURS en app.js) -->
               <dl>
-                <div><dt>LUN — VIE</dt><dd>08:30 — 18:00</dd></div>
-                <div><dt>SÁBADO</dt><dd>CERRADO</dd></div>
-                <div><dt>DOMINGO</dt><dd>CERRADO</dd></div>
+                <div><dt>Lunes a viernes</dt><dd>8:30 – 18:00</dd></div>
+                <div><dt>Sábado</dt><dd>Cerrado</dd></div>
+                <div><dt>Domingo</dt><dd>Cerrado</dd></div>
               </dl>
             </div>
 
             <!-- AQUÍ INTEGRARÁ MI SOCIO EL MÓDULO DE RESERVAS Y BASE DE DATOS -->
             <div class="booking" id="booking-module">
-              <div class="booking__inner mono">
-                <span class="booking__corner booking__corner--tl"></span><span class="booking__corner booking__corner--br"></span>
-                <p>MÓDULO DE RESERVAS</p>
-                <small>Próximamente: pide cita online</small>
+              <div class="booking__inner">
+                <p>Pide cita online</p>
+                <small>Muy pronto, aquí mismo.</small>
               </div>
             </div>
           </div>
@@ -293,22 +315,34 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="footer__cta wrap">
-      <p class="mono eyebrow">¿HABLAMOS DE TU COCHE?</p>
-      <a href="tel:+34933527028" class="footer__phone mono" data-magnetic>933 52 70 28</a>
+    <div class="footer__top wrap">
+      <p class="footer__hello display">¿Hablamos de tu coche?</p>
+      <a href="tel:+34933527028" class="footer__phone display" data-magnetic>933 52 70 28</a>
+      <address class="footer__addr">Carrer d'Alexandre Galí, 41 · 08027 Barcelona (Sant Andreu)</address>
     </div>
 
-    <div class="footer__giant display" aria-hidden="true" id="giant">CHICOTE</div>
+    <div class="footer__giant display" aria-hidden="true" id="giant">Talleres Chicote</div>
 
-    <div class="wrap footer__legal mono">
+    <div class="wrap footer__legal">
       <div>
-        <p>© <span id="year">2026</span> TALLERES CHICOTE · Carrer d'Alexandre Galí, 41 · 08027 Barcelona</p>
+        <p>© <span id="year">2026</span> Talleres Chicote. Todos los derechos reservados.</p>
         <!-- TODO: completar con razón social y NIF reales del titular -->
         <p class="dim">Aviso legal: los contenidos de esta web son meramente informativos. Titular: [razón social y NIF por completar]. Hojas de reclamaciones a disposición de los clientes en el taller.</p>
       </div>
       <p class="credit">Diseño web por <a href="#" rel="noopener">Norbentis</a></p>
     </div>
   </footer>
+
+  <!-- Barra de llamada fija en móvil: teléfono y dirección siempre a mano -->
+  <div class="callbar" id="callbar">
+    <a href="tel:+34933527028" class="callbar__call">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      Llamar 933 52 70 28
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Carrer+d'Alexandre+Gal%C3%AD+41+08027+Barcelona" target="_blank" rel="noopener" class="callbar__map" aria-label="Cómo llegar en Google Maps">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+    </a>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
