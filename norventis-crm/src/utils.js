@@ -93,3 +93,9 @@ export const readFileAsDataUrl = (file) =>
   })
 
 export const fmtSize = (b = 0) => (b > 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`)
+
+// localStorage puede no existir (iframes con sandbox): nunca debe romper la app.
+export const ls = {
+  get: (k) => { try { return localStorage.getItem(k) } catch { return null } },
+  set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* sin persistencia */ } },
+}

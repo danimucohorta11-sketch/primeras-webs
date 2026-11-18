@@ -95,7 +95,7 @@ export function DocModal({ doc, leadId, onClose }) {
 
 // ------------------------------------------------------------------ Tabla de documentos (reutilizable)
 export function DocTable({ docs, showClient = false, onOpenLead }) {
-  const { leads, saveDoc, deleteDoc, notify } = useStore()
+  const { leads, saveDoc, deleteDoc, notify, askConfirm } = useStore()
   const [editing, setEditing] = useState(null)
   const nameOf = (id) => leads.find((l) => l.id === id)?.empresa || '—'
 
@@ -159,7 +159,7 @@ export function DocTable({ docs, showClient = false, onOpenLead }) {
                         <button title="Marcar como pagada" onClick={() => markPaid(d)} className="rounded-md p-1.5 text-slate-400 hover:bg-emerald-50 hover:text-emerald-700"><CheckCircle2 size={15} /></button>
                       )}
                       <button title="Editar" onClick={() => setEditing(d)} className="rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"><Pencil size={15} /></button>
-                      <button title="Eliminar" onClick={() => confirm(`¿Eliminar ${d.numero}?`) && deleteDoc(d.id)} className="rounded-md p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600"><Trash2 size={15} /></button>
+                      <button title="Eliminar" onClick={() => askConfirm(`¿Eliminar ${d.numero}?`, () => deleteDoc(d.id))} className="rounded-md p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600"><Trash2 size={15} /></button>
                     </div>
                   </td>
                 </tr>

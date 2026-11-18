@@ -110,7 +110,7 @@ const Section = ({ title, hint, children, action }) => (
 
 // ------------------------------------------------------------------ Actividad
 function ActivityTab({ lead, acts }) {
-  const { deleteActivity } = useStore()
+  const { deleteActivity, askConfirm } = useStore()
   const [formKey, setFormKey] = useState(0)
   return (
     <>
@@ -143,7 +143,7 @@ function ActivityTab({ lead, acts }) {
                     {a.resultado && <ResultBadge id={a.resultado} />}
                     <span className="text-xs text-slate-400">{fmtDateTime(a.fecha)}</span>
                     <span className="flex items-center gap-1 text-xs text-slate-500"><Avatar name={a.responsable} />{a.responsable}</span>
-                    <button onClick={() => confirm('¿Eliminar esta interacción?') && deleteActivity(a.id)} className="ml-auto text-slate-300 opacity-0 hover:text-rose-500 group-hover:opacity-100" title="Eliminar"><Trash2 size={13} /></button>
+                    <button onClick={() => askConfirm('¿Eliminar esta interacción?', () => deleteActivity(a.id))} className="ml-auto text-slate-300 opacity-0 hover:text-rose-500 group-hover:opacity-100" title="Eliminar"><Trash2 size={13} /></button>
                   </div>
                   {a.notas && <p className="mt-1 whitespace-pre-line text-sm text-slate-600">{a.notas}</p>}
                   {a.proximoSeguimiento && <p className="mt-1 text-xs text-slate-500">Seguimiento programado: <FollowUp date={a.proximoSeguimiento} /></p>}

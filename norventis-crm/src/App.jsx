@@ -5,9 +5,10 @@ import Pipeline from './components/Pipeline'
 import Finance from './components/Finance'
 import LeadDrawer from './components/LeadDrawer'
 import QuickCall from './components/QuickCall'
-import { Toast } from './components/ui'
+import { Modal, Toast } from './components/ui'
 import { useStore } from './store'
 import { SOCIOS } from './constants'
+import { ls } from './utils'
 
 const NAV = [
   ['dashboard', 'Dashboard', LayoutDashboard],
@@ -16,15 +17,15 @@ const NAV = [
 ]
 
 export default function App() {
-  const { me, setMe, resetDemo, notify } = useStore()
-  const [view, setView] = useState(() => localStorage.getItem('norventis-nav') || 'dashboard')
+  const { me, setMe, resetDemo, notify, askConfirm, confirmState, setConfirmState } = useStore()
+  const [view, setView] = useState(() => ls.get('norventis-nav') || 'dashboard')
   const [openLead, setOpenLead] = useState(null)
   const [quick, setQuick] = useState(null) // { leadId } | null
   const [search, setSearch] = useState('')
 
   const go = (v) => {
     setView(v)
-    localStorage.setItem('norventis-nav', v)
+    ls.set('norventis-nav', v)
   }
   const onQuickCall = (leadId) => setQuick({ leadId })
 
@@ -55,7 +56,7 @@ export default function App() {
           </select>
           <button
             className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-600"
-            onClick={() => { if (confirm('¿Restaurar los datos de ejemplo? Se perderán los cambios actuales.')) { resetDemo(); notify('Datos de ejemplo restaurados') } }}
+            onClick={() => { askConfirm('¿Restaurar los datos de ejemplo? Se perderán los cambios actuales.', () => { resetDemo(); notify('Datos de ejemplo restaurados') }) }}
           >
             <RotateCcw size={11} /> Restaurar datos demo
           </button>
@@ -93,6 +94,13 @@ export default function App() {
 
       {openLead && <LeadDrawer leadId={openLead} onClose={() => setOpenLead(null)} />}
       {quick && <QuickCall leadId={quick.leadId} onClose={() => setQuick(null)} onOpenLead={setOpenLead} />}
+      {confirmState && (
+        <Modal title="Confirmar" onClose={() => setConfirmState(null)} width="max-w-sm"
+          footer={<><button className="btn-ghost" onClick={() => setConfirmState(null)}>Cancelar</button>
+            <button className="btn bg-rose-600 text-white hover:bg-rose-700" onClick={() => { confirmState.onYes(); setConfirmState(null) }}>Confirmar</button></>}>
+          <p className="text-sm text-slate-600">{confirmState.message}</p>
+        </Modal>
+      )}
       <Toast />
     </div>
   )

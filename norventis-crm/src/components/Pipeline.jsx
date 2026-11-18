@@ -3,11 +3,11 @@ import { ArrowDown, ArrowUp, LayoutGrid, List, Phone, PhoneCall, Plus, Search } 
 import { Avatar, CopyButton, EmptyState, FollowUp, Modal, PageHeader, ResultBadge } from './ui'
 import { lastActivityOf, useStore } from '../store'
 import { SOCIOS, STAGES } from '../constants'
-import { relDay, telHref } from '../utils'
+import { ls, relDay, telHref } from '../utils'
 
 export default function Pipeline({ onOpenLead, onQuickCall, globalQuery }) {
   const { leads, activities, moveLead, notify, me } = useStore()
-  const [view, setView] = useState(() => localStorage.getItem('norventis-view') || 'kanban')
+  const [view, setView] = useState(() => ls.get('norventis-view') || 'kanban')
   const [q, setQ] = useState('')
   const [resp, setResp] = useState('todos')
   const [sector, setSector] = useState('todos')
@@ -17,7 +17,7 @@ export default function Pipeline({ onOpenLead, onQuickCall, globalQuery }) {
 
   const setViewP = (v) => {
     setView(v)
-    localStorage.setItem('norventis-view', v)
+    ls.set('norventis-view', v)
   }
 
   const sectors = useMemo(() => [...new Set(leads.map((l) => l.sector).filter(Boolean))].sort(), [leads])

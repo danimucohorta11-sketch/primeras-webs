@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { buildSeed } from './data/seed'
-import { nowISO, today, uid } from './utils'
+import { ls, nowISO, today, uid } from './utils'
 import { STAGE_BY_ID } from './constants'
 
 /**
@@ -14,7 +14,7 @@ const Ctx = createContext(null)
 
 function load() {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = ls.get(KEY)
     if (raw) return JSON.parse(raw)
   } catch {
     /* datos corruptos: se regenera la demo */
@@ -30,21 +30,19 @@ export const effectiveEstado = (doc) =>
 
 export function StoreProvider({ children }) {
   const [db, setDb] = useState(load)
-  const [me, setMeState] = useState(() => localStorage.getItem(ME_KEY) || 'Socio 1')
+  const [me, setMeState] = useState(() => ls.get(ME_KEY) || 'Socio 1')
   const [toast, setToast] = useState(null)
+  const [confirmState, setConfirmState] = useState(null)
+  const askConfirm = useCallback((message, onYes) => setConfirmState({ message, onYes }), [])
   const toastTimer = useRef()
 
   useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(db))
-    } catch (e) {
-      console.warn('No se pudo guardar en localStorage', e)
-    }
+    ls.set(KEY, JSON.stringify(db))
   }, [db])
 
   const setMe = (v) => {
     setMeState(v)
-    localStorage.setItem(ME_KEY, v)
+    ls.set(ME_KEY, v)
   }
 
   const notify = useCallback((message, tone = 'ok') => {
@@ -145,10 +143,10 @@ export function StoreProvider({ children }) {
 
   const value = useMemo(
     () => ({
-      ...db, me, setMe, toast, notify,
+      ...db, me, setMe, toast, notify, askConfirm, confirmState, setConfirmState,
       addLead, updateLead, moveLead, deleteLead, addActivity, deleteActivity, saveDoc, deleteDoc, nextDocNumber, resetDemo,
     }),
-    [db, me, toast, notify, addLead, updateLead, moveLead, deleteLead, addActivity, deleteActivity, saveDoc, deleteDoc, nextDocNumber, resetDemo],
+    [db, me, toast, notify, askConfirm, confirmState, addLead, updateLead, moveLead, deleteLead, addActivity, deleteActivity, saveDoc, deleteDoc, nextDocNumber, resetDemo],
   )
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
