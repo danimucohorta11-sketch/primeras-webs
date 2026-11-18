@@ -28,10 +28,23 @@ npm run build    # producción en dist/
 - **Finanzas**: presupuestos y facturas con dropzone de PDF, importe total / pagado / pendiente, vencimiento y estado
   (las facturas "Enviada" pasadas de fecha se muestran como "Vencida").
 
-## Migrar a Supabase
+## Puesta en producción (Supabase + Vercel)
 
-`supabase/schema.sql` contiene el esquema completo (tablas, enums, vistas de KPIs y RLS solo para socios).
-Las acciones de `src/store.jsx` (`addLead`, `addActivity`, `saveDoc`…) son el único punto a sustituir por llamadas
-a `@supabase/supabase-js`; los PDFs pasarían a Supabase Storage (`documentos.archivo_path`).
+1. **Supabase**: crea un proyecto (región UE). En *Authentication → Sign In / Providers* desactiva
+   "Allow new users to sign up". En *Authentication → Users → Add user* crea los dos usuarios (Auto confirm).
+2. En *SQL Editor* pega y ejecuta `supabase/schema.sql`. Después ejecuta el bloque "PASO FINAL" del final del
+   archivo (con vuestros emails) para dar de alta a los dos socios.
+3. En *Project Settings → API* copia la **Project URL** y la clave **anon public**
+   (nunca uses la `service_role` en el frontend).
+4. **Local**: `cp .env.example .env.local`, rellena los dos valores y `npm run dev`.
+5. **Hosting (Vercel)**: importa el repo en vercel.com, *Root Directory* = `norventis-crm`, Framework = Vite,
+   y añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` en *Environment Variables*. Cada push despliega.
+6. En Supabase, *Authentication → URL Configuration*: pon la URL de Vercel como *Site URL*.
 
-> Los nombres de socios se definen en `src/constants.js` (`SOCIOS`).
+Con las variables definidas la app pide login, comparte los datos entre socios en tiempo real y guarda los PDF
+en un bucket privado (`documentos`). Sin ellas arranca en modo demo.
+
+> Los nombres de socio por defecto son "Socio 1" / "Socio 2". Para usar nombres reales define `VITE_SOCIOS`
+> y usa los mismos nombres en la tabla `socios`.
+> Las credenciales de proyecto (pestaña Proyecto) se guardan en texto en la BD: para claves sensibles usa un
+> gestor de contraseñas y guarda solo el enlace.

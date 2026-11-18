@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { LayoutDashboard, KanbanSquare, PhoneCall, RotateCcw, Search, Wallet } from 'lucide-react'
+import { LayoutDashboard, KanbanSquare, LogOut, PhoneCall, RotateCcw, Search, Wallet } from 'lucide-react'
 import Dashboard from './components/Dashboard'
 import Pipeline from './components/Pipeline'
 import Finance from './components/Finance'
 import LeadDrawer from './components/LeadDrawer'
 import QuickCall from './components/QuickCall'
 import { Modal, Toast } from './components/ui'
+import Login, { NoAccess, Splash } from './components/Login'
 import { useStore } from './store'
 import { SOCIOS } from './constants'
 import { ls } from './utils'
@@ -17,7 +18,7 @@ const NAV = [
 ]
 
 export default function App() {
-  const { me, setMe, resetDemo, notify, askConfirm, confirmState, setConfirmState } = useStore()
+  const { me, setMe, resetDemo, notify, askConfirm, confirmState, setConfirmState, isRemote, session, profile, loading, signOut } = useStore()
   const [view, setView] = useState(() => ls.get('norventis-nav') || 'dashboard')
   const [openLead, setOpenLead] = useState(null)
   const [quick, setQuick] = useState(null) // { leadId } | null
@@ -28,6 +29,12 @@ export default function App() {
     ls.set('norventis-nav', v)
   }
   const onQuickCall = (leadId) => setQuick({ leadId })
+
+  if (isRemote) {
+    if (session === undefined || (session && loading)) return <><Splash /><Toast /></>
+    if (!session) return <><Login /><Toast /></>
+    if (!profile) return <NoAccess />
+  }
 
   return (
     <div className="flex h-full">
@@ -50,16 +57,28 @@ export default function App() {
           ))}
         </nav>
         <div className="space-y-2 border-t border-slate-100 p-4">
-          <span className="label">Sesión como</span>
-          <select className="input" value={me} onChange={(e) => setMe(e.target.value)}>
-            {SOCIOS.map((s) => <option key={s}>{s}</option>)}
-          </select>
-          <button
-            className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-600"
-            onClick={() => { askConfirm('¿Restaurar los datos de ejemplo? Se perderán los cambios actuales.', () => { resetDemo(); notify('Datos de ejemplo restaurados') }) }}
-          >
-            <RotateCcw size={11} /> Restaurar datos demo
-          </button>
+          {isRemote ? (
+            <>
+              <p className="truncate text-xs text-slate-500" title={session.user.email}>{session.user.email}</p>
+              <p className="text-sm font-medium text-slate-800">{me}</p>
+              <button className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-600" onClick={signOut}>
+                <LogOut size={11} /> Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <>
+              <span className="label">Sesión como</span>
+              <select className="input" value={me} onChange={(e) => setMe(e.target.value)}>
+                {SOCIOS.map((s) => <option key={s}>{s}</option>)}
+              </select>
+              <button
+                className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-600"
+                onClick={() => askConfirm('¿Restaurar los datos de ejemplo? Se perderán los cambios actuales.', () => { resetDemo(); notify('Datos de ejemplo restaurados') })}
+              >
+                <RotateCcw size={11} /> Restaurar datos demo
+              </button>
+            </>
+          )}
         </div>
       </aside>
 

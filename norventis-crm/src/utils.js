@@ -51,7 +51,13 @@ export const relDay = (iso) => {
 }
 
 // ---------- Varios ----------
-export const uid = (p = 'id') => `${p}_${Math.random().toString(36).slice(2, 9)}`
+// UUID real: es el tipo de clave que usa la base de datos (Supabase).
+export const uid = () =>
+  globalThis.crypto?.randomUUID?.() ??
+  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    return (c === 'x' ? r : (r & 3) | 8).toString(16)
+  })
 
 export const copyText = async (text) => {
   try {

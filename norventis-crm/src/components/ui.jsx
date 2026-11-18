@@ -3,6 +3,7 @@ import { Check, Copy, X } from 'lucide-react'
 import { DOC_ESTADO_BADGE, RESULTADO_BY_ID, STAGE_BY_ID } from '../constants'
 import { copyText, diffDays, fmtDate, initials, relDay, today } from '../utils'
 import { useStore } from '../store'
+import { SOCIOS } from '../constants'
 
 export const Badge = ({ className = '', children }) => (
   <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset ${className}`}>
@@ -41,7 +42,7 @@ export const FollowUp = ({ date, compact = false }) => {
 }
 
 export const Avatar = ({ name, size = 'sm' }) => {
-  const tone = name === 'Socio 1' ? 'bg-brand-100 text-brand-700' : 'bg-emerald-100 text-emerald-700'
+  const tone = SOCIOS.indexOf(name) <= 0 ? 'bg-brand-100 text-brand-700' : 'bg-emerald-100 text-emerald-700'
   const sz = size === 'sm' ? 'h-6 w-6 text-[10px]' : 'h-8 w-8 text-xs'
   return (
     <span title={name} className={`inline-flex shrink-0 items-center justify-center rounded-full font-semibold ${tone} ${sz}`}>
@@ -101,7 +102,7 @@ export const Toast = () => {
   return (
     <div key={toast.id} className="pointer-events-none fixed bottom-5 left-1/2 z-[80] -translate-x-1/2 animate-pop">
       <div className="flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm text-white shadow-lg">
-        <Check size={14} className="text-emerald-400" />
+        {toast.tone === 'err' ? <X size={14} className="text-rose-400" /> : <Check size={14} className="text-emerald-400" />}
         {toast.message}
       </div>
     </div>

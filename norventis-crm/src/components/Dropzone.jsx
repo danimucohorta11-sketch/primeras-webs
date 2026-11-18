@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react'
 import { FileText, UploadCloud, X } from 'lucide-react'
 import { fmtSize, readFileAsDataUrl } from '../utils'
+import { isRemote } from '../supabase'
 
 // En localStorage solo se guardan archivos pequeños; con Supabase Storage / Firebase Storage se sube el binario
 // y aquí solo se guardaría la URL/ruta (ver supabase/schema.sql, columna documentos.archivo_path).
 const MAX_INLINE = 1.5 * 1024 * 1024
+const MAX_UPLOAD = 20 * 1024 * 1024
 
 export default function Dropzone({ value, onChange }) {
   const input = useRef()
@@ -17,9 +19,14 @@ export default function Dropzone({ value, onChange }) {
       setError('Solo se admiten archivos PDF.')
       return
     }
+    if (isRemote && file.size > MAX_UPLOAD) {
+      setError('El PDF supera los 20 MB.')
+      return
+    }
     setError('')
-    const dataUrl = file.size <= MAX_INLINE ? await readFileAsDataUrl(file) : null
-    onChange({ name: file.name, size: file.size, dataUrl })
+    // Modo remoto: se sube el archivo al guardar. Demo: se guarda en el navegador si es pequeño.
+    const dataUrl = !isRemote && file.size <= MAX_INLINE ? await readFileAsDataUrl(file) : null
+    onChange({ name: file.name, size: file.size, dataUrl, file })
   }
 
   if (value) {
@@ -30,7 +37,7 @@ export default function Dropzone({ value, onChange }) {
           <p className="truncate text-sm font-medium text-slate-800">{value.name}</p>
           <p className="text-xs text-slate-500">
             {fmtSize(value.size)}
-            {!value.dataUrl && ' · demo: archivo no almacenado (supera 1,5 MB o es dato de ejemplo)'}
+            {!isRemote && !value.dataUrl && !value.file && ' · demo: archivo no almacenado (supera 1,5 MB o es dato de ejemplo)'}
           </p>
         </div>
         <button type="button" onClick={() => onChange(null)} className="rounded-md p-1 text-slate-400 hover:bg-white hover:text-slate-700" title="Quitar archivo">

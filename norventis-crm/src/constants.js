@@ -1,6 +1,7 @@
 import { Phone, MessageCircle, Mail, Users } from 'lucide-react'
 
-export const SOCIOS = ['Socio 1', 'Socio 2']
+// Nombres de los socios. Configurables con VITE_SOCIOS="Ana,Luis" (deben coincidir con socios.nombre en la BD).
+export const SOCIOS = (import.meta.env.VITE_SOCIOS || 'Socio 1,Socio 2').split(',').map((s) => s.trim()).filter(Boolean)
 
 // Las clases de Tailwind deben escribirse completas (no concatenadas) para que el compilador las detecte.
 export const STAGES = [

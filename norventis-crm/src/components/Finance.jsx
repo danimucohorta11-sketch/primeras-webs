@@ -9,6 +9,7 @@ import { addDays, fmtDateFull, fmtMoney, today } from '../utils'
 // ------------------------------------------------------------------ Modal crear / editar documento
 export function DocModal({ doc, leadId, onClose }) {
   const { leads, saveDoc, nextDocNumber, notify } = useStore()
+  const [saving, setSaving] = useState(false)
   const editing = !!doc
   const [f, setF] = useState(() =>
     doc || {
@@ -25,11 +26,17 @@ export function DocModal({ doc, leadId, onClose }) {
     setF((s) => ({ ...s, tipo, numero: editing ? s.numero : nextDocNumber(tipo), estado: DOC_ESTADOS[tipo].includes(s.estado) ? s.estado : 'Borrador', pagado: tipo === 'presupuesto' ? 0 : s.pagado }))
 
   const ok = f.leadId && total > 0 && f.numero.trim()
-  const submit = () => {
-    if (!ok) return
-    saveDoc({ ...f, total, pagado: Math.min(pagado, total) })
-    notify(editing ? 'Documento actualizado' : `${f.tipo === 'factura' ? 'Factura' : 'Presupuesto'} creado`)
-    onClose()
+  const submit = async () => {
+    if (!ok || saving) return
+    setSaving(true)
+    try {
+      await saveDoc({ ...f, total, pagado: Math.min(pagado, total) })
+      notify(editing ? 'Documento actualizado' : `${f.tipo === 'factura' ? 'Factura' : 'Presupuesto'} creado`)
+      onClose()
+    } catch (e) {
+      notify('No se pudo guardar: ' + (e.message || e), 'err')
+      setSaving(false)
+    }
   }
 
   return (
@@ -37,7 +44,7 @@ export function DocModal({ doc, leadId, onClose }) {
       title={editing ? `Editar ${f.numero}` : 'Nuevo presupuesto / factura'}
       onClose={onClose}
       width="max-w-xl"
-      footer={<><button className="btn-ghost" onClick={onClose}>Cancelar</button><button className="btn-primary" disabled={!ok} onClick={submit}>{editing ? 'Guardar cambios' : 'Crear'}</button></>}
+      footer={<><button className="btn-ghost" onClick={onClose}>Cancelar</button><button className="btn-primary" disabled={!ok || saving} onClick={submit}>{saving ? 'Guardando…' : editing ? 'Guardar cambios' : 'Crear'}</button></>}
     >
       <div className="grid grid-cols-2 gap-3">
         {!leadId && (
@@ -95,7 +102,7 @@ export function DocModal({ doc, leadId, onClose }) {
 
 // ------------------------------------------------------------------ Tabla de documentos (reutilizable)
 export function DocTable({ docs, showClient = false, onOpenLead }) {
-  const { leads, saveDoc, deleteDoc, notify, askConfirm } = useStore()
+  const { leads, saveDoc, deleteDoc, notify, askConfirm, openDocFile } = useStore()
   const [editing, setEditing] = useState(null)
   const nameOf = (id) => leads.find((l) => l.id === id)?.empresa || '—'
 
@@ -132,7 +139,9 @@ export function DocTable({ docs, showClient = false, onOpenLead }) {
                     <p className="font-medium text-slate-900">{d.numero} <span className="text-xs font-normal capitalize text-slate-400">· {d.tipo}</span></p>
                     <p className="max-w-[260px] truncate text-xs text-slate-500" title={d.concepto}>{d.concepto}</p>
                     {d.archivo && (
-                      d.archivo.dataUrl ? (
+                      d.archivo.path ? (
+                        <button onClick={() => openDocFile(d)} className="mt-0.5 inline-flex items-center gap-1 text-xs text-brand-700 hover:underline"><Download size={11} />{d.archivo.name}</button>
+                      ) : d.archivo.dataUrl ? (
                         <a href={d.archivo.dataUrl} download={d.archivo.name} className="mt-0.5 inline-flex items-center gap-1 text-xs text-brand-700 hover:underline"><Download size={11} />{d.archivo.name}</a>
                       ) : (
                         <span className="mt-0.5 inline-flex items-center gap-1 text-xs text-slate-400"><FileText size={11} />{d.archivo.name}</span>
