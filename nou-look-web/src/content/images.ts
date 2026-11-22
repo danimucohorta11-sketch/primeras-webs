@@ -63,7 +63,15 @@ export const placeholder = (
 export const images = {
   hero: stock("hero", "13543276", "Mujer de espaldas con media melena castaña ondulada", "4 / 5", "50% 30%", "50% 25%"),
 
-  salonA: stock("salon-a", "696285", "Peluquero secando el cabello de una clienta en el salón", "4 / 5", "50% 40%"),
+  salonA: {
+    id: "salon-a",
+    src: "/images/salon-a.webp",
+    alt: "Estilista marcando ondas con tenacilla en la melena castaña de una clienta",
+    ratio: "4 / 5",
+    tone: "sand",
+    focal: { desktop: "50% 55%" },
+    status: "provisional",
+  } satisfies ImageEntry as ImageEntry,
   salonB: stock("salon-b", "7142796", "Cepillado de una melena rubia", "1 / 1", "50% 35%"),
 
   svcCorte: stock("servicio-corte", "6487882", "Corte de cabello con tijera y peine", "4 / 5", "50% 45%"),
