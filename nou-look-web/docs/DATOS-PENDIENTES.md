@@ -31,7 +31,7 @@ Hay otros salones llamados "Nou Look" (p. ej. Valls, Crevillente). **No** se ha 
 ## Fotografías
 Las de `public/images/` (WebP optimizado) son **stock de Pexels** (licencia Pexels: uso comercial permitido, atribución no obligatoria). **No son trabajos de Nou Look** y se muestran sin etiqueta. Antes de publicar, sustituirlas por fotos reales del salón; en especial las de "Nuestros trabajos", que no deben presentarse como propias. Solo los huecos sin foto (marcadores) llevan etiqueta "Foto provisional".
 
-Procedencia (pexels.com/photo/<id>): 13543276 hero · 3065207 · 696285 · 7142796 · 6487882 · 4981476 · 9941096 · 3993449 · 10561323 · 8468036 · 7755461 · 2995337 · 7755225 · 3993312 · 7440133 · 705255 · 8468127. Verificar la licencia vigente de cada una en su página.
+Procedencia (pexels.com/photo/<id>): 13543276 hero · 3065207 · 7142796 · 6487882 · 4981476 · 9941096 · 3993449 · 10561323 · 8468036 · 7755461 · 2995337 · 7755225 · 3993312 · 7440133 · 705255 · 8468127. `salon-a.webp` (sección Salón): foto aportada por el cliente, verificar su procedencia y licencia. Verificar la licencia vigente de cada una en su página.
 
 El hero usa 5 escenas con recortes propios para escritorio (16:9) y móvil (vertical) en `public/images/hero/` (`heroSlides` en `src/content/sections.ts`), derivadas de fotos de stock: 13543276, 9941096, 7142796, 3065207, 10561323. Cada imagen lleva una miniatura desenfocada en `src/content/blur.json` para que nunca haya huecos mientras carga.
 
