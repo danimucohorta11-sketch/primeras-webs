@@ -32,3 +32,9 @@ Estética de salón de moda editorial: cabecera blanca con logotipo centrado, fo
 botones en píldora, superficies crema y piedra, banda y panel negros, frases en mayúsculas de peso
 alto y el nombre del salón a gran tamaño en el pie. Orden de la home: hero · barra de cita y datos ·
 el salón · servicios · experiencia · trabajos · (reseñas, si las hay) · contacto · Instagram · reserva.
+
+## Despliegue (Vercel)
+Proyecto de Vercel conectado al repositorio con **Root Directory = `nou-look-web`** (Framework: Next.js).
+- Rama principal → despliegue de *Production*.
+- Cualquier otra rama → despliegue de *Preview* automático con su propio enlace.
+- Opcional: variable `NEXT_PUBLIC_SITE_URL` con el dominio final (para canonical, sitemap y Open Graph).
