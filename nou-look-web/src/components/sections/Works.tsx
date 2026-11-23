@@ -7,7 +7,7 @@ import { works, worksIntro } from "@/content/sections";
 import { images } from "@/content/images";
 import { site } from "@/content/site";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal, LineReveal } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { LinkButton } from "@/components/ui/BookButton";
 
 function ratioNumber(r: string) {
@@ -15,7 +15,7 @@ function ratioNumber(r: string) {
   return w / h;
 }
 
-/** Galería masonry editorial (columnas CSS, proporciones mixtas) con lightbox accesible. */
+/** Galería en rejilla (una pieza grande + cuatro pequeñas) con lightbox accesible. */
 export function Works() {
   const [active, setActive] = useState<number | null>(null);
 
@@ -38,43 +38,53 @@ export function Works() {
   return (
     <section id="trabajos" aria-labelledby="trabajos-title" className="section bg-cream">
       <div className="wrap">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-3xl">
-            <Reveal>
-              <p className="eyebrow text-clay-deep">{worksIntro.eyebrow}</p>
-            </Reveal>
-            <h2 id="trabajos-title" className="display display-lg mt-5">
-              <LineReveal lines={[worksIntro.title]} />
-            </h2>
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-md text-muted">{worksIntro.text}</p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.15}>
-            <LinkButton href={site.social.instagram.url} external>
-              Ver Instagram {site.social.instagram.handle}
-            </LinkButton>
+        <header className="mx-auto max-w-2xl text-center">
+          <Reveal>
+            <p className="kicker">{worksIntro.eyebrow}</p>
           </Reveal>
-        </div>
+          <Reveal delay={0.06}>
+            <h2 id="trabajos-title" className="display display-lg mt-3">
+              {worksIntro.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-4 text-muted">{worksIntro.text}</p>
+          </Reveal>
+        </header>
 
-        <ul className="mt-12 columns-2 gap-3 md:mt-20 md:columns-3 md:gap-5 [&>li]:mb-3 md:[&>li]:mb-5">
+        {/* Una pieza grande a la izquierda y cuatro pequeñas en rejilla 2×2 */}
+        <ul className="mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-4 md:grid-rows-2 md:gap-4">
           {works.map((key, i) => (
-            <li key={key} className="break-inside-avoid">
+            <li key={key} className={i === 0 ? "col-span-2 md:row-span-2" : ""}>
               <button
                 type="button"
                 onClick={() => setActive(i)}
                 aria-label={`Ampliar fotografía: ${images[key].alt}`}
-                className="group relative block w-full cursor-zoom-in text-left"
+                className="group block h-full w-full cursor-zoom-in overflow-hidden rounded-sm bg-paper text-left"
               >
-                <Photo name={key} sizes="(min-width: 768px) 30vw, 46vw" />
-                <span className="pointer-events-none absolute inset-0 flex items-end justify-between bg-gradient-to-t from-ink/45 via-transparent to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-                  <span className="eyebrow text-ivory">Ampliar</span>
-                  <span className="display text-xl text-ivory">{String(i + 1).padStart(2, "0")}</span>
+                <div className="relative">
+                  <Photo
+                    name={key}
+                    ratio={i === 0 ? "6 / 5" : "4 / 3"}
+                    sizes={i === 0 ? "(min-width: 768px) 46vw, 92vw" : "(min-width: 768px) 23vw, 46vw"}
+                  />
+                </div>
+                <span className="flex items-center justify-between gap-3 px-4 py-3 text-[0.88rem] md:py-3.5">
+                  <span className="line-clamp-1">{images[key].alt}</span>
+                  <span aria-hidden className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
                 </span>
               </button>
             </li>
           ))}
         </ul>
+
+        <Reveal className="mt-10 flex justify-center">
+          <LinkButton href={site.social.instagram.url} external>
+            {worksIntro.instagramCta}
+          </LinkButton>
+        </Reveal>
       </div>
 
       <Dialog.Root open={active !== null} onOpenChange={(o) => !o && setActive(null)}>

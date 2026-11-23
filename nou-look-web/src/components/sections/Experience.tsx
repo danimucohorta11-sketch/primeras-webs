@@ -1,40 +1,59 @@
 import { experience } from "@/content/sections";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal, LineReveal } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
+import { BookButton } from "@/components/ui/BookButton";
 
+/**
+ * Experiencia: mosaico 2×2 de fotografías a la izquierda y panel oscuro
+ * con frase de impacto en mayúsculas a la derecha.
+ */
 export function Experience() {
-  const [a, b, c] = experience.images;
   return (
-    <section aria-labelledby="exp-title" className="section bg-charcoal text-ivory">
-      <div className="wrap">
-        <Reveal>
-          <p className="eyebrow text-sand">{experience.eyebrow}</p>
-        </Reveal>
-        <h2 id="exp-title" className="display display-lg mt-5 max-w-4xl">
-          <LineReveal lines={[experience.title]} />
-        </h2>
+    <section aria-labelledby="experiencia-title" className="grid bg-charcoal text-paper lg:grid-cols-2">
+      <div className="grid grid-cols-2">
+        {experience.images.map((key) => (
+          <Photo key={key} name={key} ratio="1 / 1" sizes="(min-width: 1024px) 25vw, 50vw" />
+        ))}
+      </div>
 
-        <div className="mt-14 grid gap-8 md:mt-20 md:grid-cols-12 md:gap-6">
-          <div className="md:col-span-4">
-            <Photo name={a} sizes="(min-width: 768px) 30vw, 92vw" />
-          </div>
-          <div className="flex flex-col gap-8 md:col-span-5 md:mt-24">
-            <Photo name={c} sizes="(min-width: 768px) 40vw, 92vw" />
-            <ol className="divide-y divide-ivory/15 border-y border-ivory/15">
-              {experience.statements.map((s, i) => (
-                <Reveal key={s.n} as="li" delay={0.08 * i} className="flex gap-5 py-5">
-                  <span className="eyebrow pt-2 text-sand">{s.n}</span>
-                  <div>
-                    <h3 className="display text-[1.7rem]">{s.title}</h3>
-                    <p className="mt-1 text-sm text-ivory/65">{s.text}</p>
-                  </div>
-                </Reveal>
+      <div className="flex items-center justify-center px-[var(--gutter)] py-16 text-center lg:py-12">
+        <div className="max-w-lg">
+          <Reveal>
+            <p className="kicker text-paper/75">{experience.eyebrow}</p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h2 id="experiencia-title" className="shout shout-xl mt-4">
+              {experience.shout.map((l) => (
+                <span key={l} className="block">
+                  {l}
+                </span>
               ))}
-            </ol>
-          </div>
-          <div className="md:col-span-3 md:mt-48">
-            <Photo name={b} sizes="(min-width: 768px) 22vw, 70vw" className="max-w-[18rem] md:max-w-none" />
-          </div>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-5 text-[1.05rem] text-paper/85">{experience.title}</p>
+          </Reveal>
+
+          <ul className="mx-auto mt-8 max-w-sm space-y-0 text-left">
+            {experience.statements.map((s, i) => (
+              <Reveal
+                key={s.n}
+                as="li"
+                delay={0.16 + i * 0.06}
+                className="flex gap-4 border-t border-paper/15 py-4 last:border-b"
+              >
+                <span className="eyebrow pt-1 text-paper/55">{s.n}</span>
+                <span>
+                  <span className="block font-normal">{s.title}</span>
+                  <span className="block text-[0.9rem] text-paper/70">{s.text}</span>
+                </span>
+              </Reveal>
+            ))}
+          </ul>
+
+          <Reveal delay={0.35} className="mt-8">
+            <BookButton variant="light" />
+          </Reveal>
         </div>
       </div>
     </section>

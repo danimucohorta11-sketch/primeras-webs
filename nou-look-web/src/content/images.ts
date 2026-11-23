@@ -84,10 +84,15 @@ export const images = {
   w2: stock("trabajo-2", "7755461", "Clienta en el lavacabezas del salón", "3 / 2", "50% 50%"),
   w3: stock("trabajo-3", "2995337", "Recogido trenzado con flores", "2 / 3", "50% 35%"),
   w4: stock("trabajo-4", "7755225", "Corte de puntas con tijera", "3 / 2", "50% 50%"),
+  w5: stock("trabajo-5", "3065207", "Melena larga con rizos marcados en tonos miel", "2 / 3", "50% 40%"),
 
   expA: stock("experiencia-a", "3993312", "Peluquera aplicando color a una clienta", "4 / 5", "50% 35%"),
   expB: stock("experiencia-b", "7440133", "Alisado y secado del cabello rubio", "1 / 1", "50% 40%"),
   expC: stock("experiencia-c", "705255", "Interior luminoso de una peluquería", "16 / 11", "50% 50%"),
+  expD: stock("experiencia-d", "7755461", "Clienta relajada en el lavacabezas", "1 / 1", "50% 45%"),
+
+  /** Bloque editorial a sangre (sección El salón). */
+  salonBanner: stock("salon-banner", "3993312", "Peluquera trabajando el cabello de una clienta en el salón", "16 / 9", "50% 12%", "62% 22%"),
 
   cta: stock("reserva", "8468127", "Peluquero y clienta sonriendo durante una coloración", "4 / 5", "50% 40%"),
 } as const;

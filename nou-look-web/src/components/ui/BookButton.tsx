@@ -1,18 +1,19 @@
 import { getBookingAction } from "@/lib/booking";
 
-type Variant = "primary" | "ghost" | "light" | "light-ghost";
+type Variant = "primary" | "ghost" | "light" | "light-ghost" | "cream";
 
 const variantClass: Record<Variant, string> = {
   primary: "",
   ghost: "btn-ghost",
   light: "btn-light",
   "light-ghost": "btn-light-ghost",
+  cream: "btn-cream",
 };
 
 export function Arrow() {
   return (
-    <svg className="arrow" width="18" height="10" viewBox="0 0 18 10" fill="none" aria-hidden>
-      <path d="M0 5h16.5M12 1l4.5 4L12 9" stroke="currentColor" strokeWidth="1.2" />
+    <svg className="arrow" width="16" height="10" viewBox="0 0 18 10" fill="none" aria-hidden>
+      <path d="M0 5h16.5M12 1l4.5 4L12 9" stroke="currentColor" strokeWidth="1.3" />
     </svg>
   );
 }
@@ -21,10 +22,14 @@ export function Arrow() {
 export function BookButton({
   variant = "primary",
   label,
+  small = false,
+  arrow = false,
   className = "",
 }: {
   variant?: Variant;
   label?: string;
+  small?: boolean;
+  arrow?: boolean;
   className?: string;
 }) {
   const action = getBookingAction();
@@ -32,11 +37,11 @@ export function BookButton({
   return (
     <a
       href={action.href}
-      className={`btn ${variantClass[variant]} ${className}`}
+      className={`btn ${variantClass[variant]} ${small ? "btn-sm" : ""} ${className}`}
       {...(external ? { target: "_blank", rel: "noopener" } : {})}
     >
       {label ?? action.label}
-      <Arrow />
+      {arrow && <Arrow />}
     </a>
   );
 }
@@ -46,22 +51,26 @@ export function LinkButton({
   children,
   variant = "ghost",
   external = false,
+  small = false,
+  arrow = false,
   className = "",
 }: {
   href: string;
   children: React.ReactNode;
   variant?: Variant;
   external?: boolean;
+  small?: boolean;
+  arrow?: boolean;
   className?: string;
 }) {
   return (
     <a
       href={href}
-      className={`btn ${variantClass[variant]} ${className}`}
+      className={`btn ${variantClass[variant]} ${small ? "btn-sm" : ""} ${className}`}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       {children}
-      <Arrow />
+      {arrow && <Arrow />}
     </a>
   );
 }

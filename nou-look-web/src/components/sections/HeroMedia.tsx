@@ -54,9 +54,9 @@ export function HeroMedia({ slides, active }: { slides: Slide[]; active: number 
           </div>
         );
       })}
-      {/* Velos para que el texto blanco se lea siempre sobre cualquier foto */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/65 via-ink/30 to-ink/10" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-ink/25" />
+      {/* Velo central para que el texto blanco se lea siempre sobre cualquier foto */}
+      <div className="absolute inset-0 bg-ink/25" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_55%_at_50%_52%,rgba(20,20,20,0.42),transparent_75%)]" />
     </div>
   );
 }

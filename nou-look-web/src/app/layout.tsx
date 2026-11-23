@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/cormorant-garamond/400.css";
-import "@fontsource/cormorant-garamond/500.css";
-import "@fontsource/cormorant-garamond/500-italic.css";
-import "@fontsource/cormorant-garamond/600.css";
-import "@fontsource-variable/dm-sans";
+import "@fontsource-variable/public-sans";
+import "@fontsource-variable/jost";
 import "./globals.css";
 import { site, fullAddress } from "@/content/site";
 import { MotionProvider } from "@/components/ui/MotionProvider";
@@ -32,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f0e8",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -43,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-ivory"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
         >
           Saltar al contenido
         </a>

@@ -8,8 +8,10 @@ import type { ImageKey } from "./images";
 
 export const hero = {
   eyebrow: "Peluquería unisex · Tarragona",
-  titleLines: ["Un look nuevo,", "siempre tuyo."],
+  title: "Un look nuevo, siempre tuyo.",
   subtitle: "Corte, color y cuidado del cabello con criterio. Con cita previa y sin prisas.",
+  /** Línea pequeña bajo los botones: solo datos reales. */
+  footnote: "Cita previa por teléfono · Av. Ramón y Cajal 36, Tarragona",
 };
 
 /**
@@ -23,6 +25,8 @@ export const heroSlides = [1, 2, 3, 4, 5].map((n) => ({
 
 export const salon = {
   eyebrow: "El salón",
+  /** Foto a sangre del bloque editorial. */
+  banner: "salonBanner" as ImageKey,
   title: "Detrás de cada look, personas que escuchan.",
   paragraphs: [
     "Nou Look es una peluquería unisex en Tarragona. Aquí el punto de partida es siempre el mismo: entender qué quieres y qué le sienta bien a tu cabello.",
@@ -47,7 +51,8 @@ export type Service = {
 
 export const servicesIntro = {
   eyebrow: "Servicios",
-  title: "Lo que hacemos, con calma y con criterio.",
+  title: "El servicio que tu cabello necesita.",
+  text: "Elige lo que buscas y llámanos: te reservamos el tiempo que cada servicio pide.",
   note: "Selección provisional pendiente de confirmar con el salón.",
 };
 
@@ -92,20 +97,22 @@ export const services: Service[] = [
 export const worksIntro = {
   eyebrow: "Nuestros trabajos",
   title: "El mejor argumento es el resultado.",
+  instagramCta: "Ver más en Instagram",
   text: "Una selección del trabajo del salón. Más en nuestro Instagram.",
 };
 
-export const works: ImageKey[] = ["w1", "w2", "w3", "w4"];
+export const works: ImageKey[] = ["w1", "w2", "w3", "w4", "w5"];
 
 export const experience = {
   eyebrow: "Experiencia Nou Look",
   title: "Venir a Nou Look es parar un momento.",
+  shout: ["Tu momento.", "Tu estilo."],
   statements: [
     { n: "01", title: "Sin prisas", text: "Una cita es tuya. Sin relojes a la vista." },
     { n: "02", title: "A tu medida", text: "Nada de fórmulas: cada cabello pide lo suyo." },
     { n: "03", title: "Con cuidado", text: "Del lavado al secado, cada gesto cuenta." },
   ],
-  images: ["expA", "expB", "expC"] as ImageKey[],
+  images: ["expA", "expB", "expC", "expD"] as ImageKey[],
 };
 
 /**
@@ -118,6 +125,7 @@ export const reviews: Review[] = [];
 
 export const bookingSection = {
   eyebrow: "Reserva tu cita",
+  image: "cta" as ImageKey,
   title: "Tu próximo look empieza con una llamada.",
   text: "La cita previa se gestiona por teléfono. Cuéntanos qué buscas y te buscamos hueco.",
 };
@@ -125,4 +133,11 @@ export const bookingSection = {
 export const contactSection = {
   eyebrow: "Contacto y ubicación",
   title: "Te esperamos en Tarragona.",
+  text: "Estamos en el centro de Tarragona. Llama para pedir cita o pide indicaciones para llegar.",
+};
+
+export const instagramSection = {
+  eyebrow: "Comunidad Nou Look",
+  title: "Síguenos en Instagram",
+  cta: "Seguir",
 };

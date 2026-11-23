@@ -1,58 +1,63 @@
 import { services, servicesIntro } from "@/content/sections";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal, LineReveal } from "@/components/ui/Reveal";
-import { BookButton } from "@/components/ui/BookButton";
+import { Reveal } from "@/components/ui/Reveal";
+import { BookButton, LinkButton } from "@/components/ui/BookButton";
 
 /**
- * Servicios: filas editoriales grandes de proporciones distintas y imagen alternando lado.
- * No son tarjetas repetidas: cada fila cambia de ancho, formato y orden.
+ * Servicios en tarjetas fotográficas: título y texto sobre la imagen con degradado,
+ * y dos botones en píldora. Rejilla de 3 + 2 en escritorio.
  */
 export function Services() {
   return (
     <section id="servicios" aria-labelledby="servicios-title" className="section">
       <div className="wrap">
-        <div className="max-w-3xl">
+        <header className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <p className="eyebrow text-clay-deep">{servicesIntro.eyebrow}</p>
+            <p className="kicker">{servicesIntro.eyebrow}</p>
           </Reveal>
-          <h2 id="servicios-title" className="display display-lg mt-5">
-            <LineReveal lines={[servicesIntro.title]} />
-          </h2>
-        </div>
+          <Reveal delay={0.06}>
+            <h2 id="servicios-title" className="display display-lg mt-3">
+              {servicesIntro.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-4 text-muted">{servicesIntro.text}</p>
+          </Reveal>
+        </header>
 
-        <ol className="mt-14 space-y-20 md:mt-24 md:space-y-32">
+        <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-6 md:gap-5">
           {services.map((s, i) => {
-            const wide = s.span === "wide";
-            const flip = i % 2 === 1;
+            const wide = i >= 3;
             return (
-              <li key={s.id} className="grid items-end gap-6 md:grid-cols-12 md:gap-10">
-                <div
-                  className={`${wide ? "md:col-span-8" : "md:col-span-5"} ${
-                    flip ? "md:order-2 md:col-start-auto" : ""
-                  } ${flip && !wide ? "md:col-start-8" : ""}`}
-                >
-                  <Photo
-                    name={s.image}
-                    sizes={wide ? "(min-width: 768px) 64vw, 92vw" : "(min-width: 768px) 40vw, 92vw"}
-                  />
+              <Reveal
+                key={s.id}
+                as="li"
+                delay={(i % 3) * 0.08}
+                className={`group relative overflow-hidden rounded-sm ${wide ? "md:col-span-3" : "md:col-span-2"}`}
+              >
+                <Photo
+                  name={s.image}
+                  ratio={wide ? "16 / 10" : "4 / 5"}
+                  reveal={false}
+                  sizes={wide ? "(min-width: 768px) 46vw, 92vw" : "(min-width: 768px) 30vw, 92vw"}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-paper md:p-6">
+                  <h3 className="text-[1.3rem] font-normal">{s.title}</h3>
+                  <p className="mt-1.5 max-w-sm text-[0.88rem] text-paper/85">{s.text}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <LinkButton href="#trabajos" variant="light-ghost" small>
+                      Ver trabajos
+                    </LinkButton>
+                    <BookButton variant="light" small />
+                  </div>
                 </div>
-                <div className={`${wide ? "md:col-span-4" : "md:col-span-5"} ${flip ? "md:order-1" : ""} md:pb-4`}>
-                  <Reveal>
-                    <span className="eyebrow text-muted">{String(i + 1).padStart(2, "0")}</span>
-                  </Reveal>
-                  <h3 className="display display-md mt-3">{s.title}</h3>
-                  <Reveal delay={0.1}>
-                    <p className="mt-4 max-w-md text-muted">{s.text}</p>
-                  </Reveal>
-                  <Reveal delay={0.2} className="mt-7">
-                    <BookButton variant="ghost" label="Reservar" />
-                  </Reveal>
-                </div>
-              </li>
+              </Reveal>
             );
           })}
-        </ol>
-        <p className="mt-16 text-sm text-muted md:mt-24">{servicesIntro.note}</p>
+        </ul>
+
+        <p className="mt-6 text-center text-xs text-muted">{servicesIntro.note}</p>
       </div>
     </section>
   );

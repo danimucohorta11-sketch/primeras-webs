@@ -2,32 +2,52 @@ import { bookingSection } from "@/content/sections";
 import { site } from "@/content/site";
 import { getBookingAction } from "@/lib/booking";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal, LineReveal } from "@/components/ui/Reveal";
-import { BookButton } from "@/components/ui/BookButton";
+import { Reveal } from "@/components/ui/Reveal";
+import { BookButton, LinkButton } from "@/components/ui/BookButton";
 
+/** Bloque final de reserva sobre crema: foto redondeada, titular y acciones. */
 export function BookCta() {
   const action = getBookingAction();
   return (
-    <section id="reservar" aria-labelledby="reservar-title" className="bg-clay-deep text-ivory">
-      <div className="wrap grid items-center gap-12 py-20 md:grid-cols-12 md:gap-10 md:py-32">
-        <div className="md:col-span-7">
+    <section aria-labelledby="reserva-title" className="bg-cream">
+      <div className="wrap grid items-center gap-10 py-12 md:grid-cols-12 md:gap-12 md:py-16">
+        <div className="md:col-span-4">
+          <Photo name={bookingSection.image} ratio="1 / 1" rounded="rounded-xl" sizes="(min-width: 768px) 30vw, 92vw" />
+        </div>
+
+        <div className="md:col-span-5">
           <Reveal>
-            <p className="eyebrow text-ivory/75">{bookingSection.eyebrow}</p>
+            <p className="kicker">{bookingSection.eyebrow}</p>
           </Reveal>
-          <h2 id="reservar-title" className="display display-lg mt-5">
-            <LineReveal lines={[bookingSection.title]} />
-          </h2>
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-md text-lg text-ivory/85">{bookingSection.text}</p>
+          <Reveal delay={0.06}>
+            <h2 id="reserva-title" className="display display-lg mt-3 [text-wrap:balance]">
+              {bookingSection.title}
+            </h2>
           </Reveal>
-          <Reveal delay={0.2} className="mt-9 flex flex-col gap-4 min-[480px]:flex-row min-[480px]:items-center">
-            <BookButton variant="light" label={action.kind === "tel" ? `Llamar al ${site.phone.display}` : undefined} />
-            <p className="text-sm text-ivory/75">{site.bookingNote}</p>
+          <Reveal delay={0.12}>
+            <p className="mt-4 max-w-md text-muted">{bookingSection.text}</p>
+          </Reveal>
+          <Reveal delay={0.18} className="mt-7 flex flex-wrap gap-3">
+            <BookButton />
+            <LinkButton href="#contacto" variant="light">
+              Ver horario
+            </LinkButton>
           </Reveal>
         </div>
-        <div className="md:col-span-4 md:col-start-9">
-          <Photo name="cta" sizes="(min-width: 768px) 30vw, 70vw" className="mx-auto max-w-[22rem] md:max-w-none" />
-        </div>
+
+        <Reveal delay={0.2} className="md:col-span-3">
+          <p className="text-[0.95rem]">Llámanos</p>
+          <p className="mt-1 text-[1.9rem] font-light leading-tight">
+            <a href={action.href} className="link-u">
+              {site.phone.display}
+            </a>
+          </p>
+          <p className="mt-4 text-[0.88rem] text-muted">
+            {site.address.street}
+            <br />
+            {site.address.city}
+          </p>
+        </Reveal>
       </div>
     </section>
   );

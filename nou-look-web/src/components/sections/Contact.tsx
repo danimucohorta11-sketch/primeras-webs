@@ -1,78 +1,80 @@
 import { contactSection } from "@/content/sections";
-import { site, mapsDirectionsUrl, mapsSearchUrl } from "@/content/site";
-import { Reveal, LineReveal } from "@/components/ui/Reveal";
+import { site, fullAddress, mapsDirectionsUrl, mapsSearchUrl } from "@/content/site";
+import { Reveal } from "@/components/ui/Reveal";
 import { BookButton, LinkButton } from "@/components/ui/BookButton";
 
+/** Contacto: panel negro redondeado con tarjetas de dirección, teléfono y horario. */
 export function Contact() {
+  const card = "rounded-md border border-paper/12 bg-paper/[0.04] p-5 md:p-6";
+
   return (
-    <section id="contacto" aria-labelledby="contacto-title" className="section">
-      <div className="wrap">
-        <Reveal>
-          <p className="eyebrow text-clay-deep">{contactSection.eyebrow}</p>
-        </Reveal>
-        <h2 id="contacto-title" className="display display-lg mt-5 max-w-4xl">
-          <LineReveal lines={[contactSection.title]} />
-        </h2>
+    <section id="contacto" aria-labelledby="contacto-title" className="px-3 py-3 md:px-5 md:py-5">
+      <div className="rounded-xl bg-ink text-paper">
+        <div className="wrap py-14 md:py-20">
+          <header className="mx-auto max-w-2xl text-center">
+            <Reveal>
+              <p className="kicker text-paper/75">{contactSection.eyebrow}</p>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h2 id="contacto-title" className="display display-lg mt-3">
+                {contactSection.title}
+              </h2>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-4 text-paper/75">{contactSection.text}</p>
+            </Reveal>
+          </header>
 
-        <div className="mt-14 grid gap-px border-y border-[var(--line)] md:mt-20 md:grid-cols-12">
-          <Reveal className="py-8 md:col-span-5 md:border-r md:border-[var(--line)] md:py-12 md:pr-10">
-            <h3 className="eyebrow text-muted">Dirección</h3>
-            <address className="display display-md mt-4 not-italic">
-              {site.address.street}
-              <br />
-              {site.address.city}
-            </address>
-            <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row">
-              <LinkButton href={mapsDirectionsUrl()} external>
-                Cómo llegar
-              </LinkButton>
-              <LinkButton href={mapsSearchUrl()} external>
-                Ver en Google Maps
-              </LinkButton>
-            </div>
-          </Reveal>
+          <div className="mx-auto mt-12 grid max-w-5xl gap-3 md:mt-14 md:grid-cols-[1fr_1fr_1.3fr] md:gap-4">
+            <Reveal className={card}>
+              <h3 className="text-[1.05rem] font-normal">Dirección</h3>
+              <address className="mt-2 text-[0.92rem] not-italic text-paper/75">
+                {site.address.street}
+                <br />
+                {site.address.city}
+              </address>
+              <p className="mt-4 text-[0.85rem]">
+                <a href={mapsDirectionsUrl()} target="_blank" rel="noopener noreferrer" className="link-u">
+                  Cómo llegar →
+                </a>
+              </p>
+            </Reveal>
 
-          <Reveal delay={0.1} className="border-t border-[var(--line)] py-8 md:col-span-3 md:border-r md:border-t-0 md:px-10 md:py-12">
-            <h3 className="eyebrow text-muted">Teléfono</h3>
-            <p className="display display-md mt-4">
-              <a className="link-u" href={`tel:${site.phone.e164}`}>
-                {site.phone.display}
-              </a>
-            </p>
-            <p className="mt-3 text-sm text-muted">{site.bookingNote}</p>
-          </Reveal>
-
-          <Reveal delay={0.2} className="border-t border-[var(--line)] py-8 md:col-span-4 md:border-t-0 md:py-12 md:pl-10">
-            <h3 className="eyebrow text-muted">Horario</h3>
-            {site.hours ? (
-              <dl className="mt-4 space-y-2">
-                {site.hours.map((h) => (
-                  <div key={h.days} className="flex justify-between gap-6">
-                    <dt>{h.days}</dt>
-                    <dd className="text-muted">{h.hours}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : (
-              <p className="mt-4 text-muted">
-                Consulta el horario llamando al{" "}
-                <a className="link-u text-ink" href={`tel:${site.phone.e164}`}>
+            <Reveal delay={0.06} className={card}>
+              <h3 className="text-[1.05rem] font-normal">Teléfono y cita previa</h3>
+              <p className="mt-2 text-[1.6rem] font-light">
+                <a href={`tel:${site.phone.e164}`} className="link-u">
                   {site.phone.display}
                 </a>
-                .
               </p>
-            )}
-            <p className="mt-8 text-sm">
-              <a className="link-u" href={site.social.instagram.url} target="_blank" rel="noopener noreferrer">
-                Instagram {site.social.instagram.handle}
-              </a>
-            </p>
-          </Reveal>
-        </div>
+              <p className="mt-2 text-[0.85rem] text-paper/70">{site.bookingNote}</p>
+            </Reveal>
 
-        <Reveal className="mt-10">
-          <BookButton />
-        </Reveal>
+            <Reveal delay={0.12} className={card}>
+              <h3 className="text-[1.05rem] font-normal">Horario</h3>
+              {site.hours ? (
+                <dl className="mt-2 space-y-1.5 text-[0.88rem]">
+                  {site.hours.map((h) => (
+                    <div key={h.days} className="flex flex-wrap justify-between gap-x-4">
+                      <dt className="whitespace-nowrap text-paper/75">{h.days}</dt>
+                      <dd className="whitespace-nowrap">{h.hours}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                <p className="mt-2 text-[0.88rem] text-paper/75">Consulta el horario por teléfono.</p>
+              )}
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1} className="mt-10 flex flex-wrap justify-center gap-3">
+            <LinkButton href={mapsSearchUrl()} variant="light-ghost" external>
+              Ver en Google Maps
+            </LinkButton>
+            <BookButton variant="light" />
+          </Reveal>
+          <p className="sr-only">{fullAddress()}</p>
+        </div>
       </div>
     </section>
   );
