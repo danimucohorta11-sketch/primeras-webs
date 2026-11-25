@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
+/** STATIC_PREVIEW=1 genera una copia estática (carpeta out/) con rutas relativas para previsualizarla. */
+const preview = process.env.STATIC_PREVIEW === "1";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  cacheComponents: !preview,
+  partialPrefetching: !preview,
+  ...(preview ? { output: "export", assetPrefix: ".", images: { unoptimized: true } } : {}),
   turbopack: {
     rules: {
       "*.css": {
